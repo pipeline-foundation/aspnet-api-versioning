@@ -30,7 +30,7 @@ jobs:
           $pathToSolution = "ApiVersioning.sln"
           $buildConfiguration = "Release"
           $useSharedCompilation = "false"
-          $testProjects = "test/Microsoft.AspNetCore.Mvc.Versioning.Tests/Microsoft.AspNetCore.Mvc.Versioning.Tests.csproj", "test/Microsoft.AspNet.WebApi.Versioning.Tests/Microsoft.AspNet.WebApi.Versioning.Tests.csproj", "test/Microsoft.AspNet.OData.Versioning.Tests/Microsoft.AspNet.OData.Versioning.Tests.csproj", "test/Microsoft.AspNet.WebApi.Acceptance.Tests/Microsoft.AspNet.WebApi.Acceptance.Tests.csproj", "test/Microsoft.AspNetCore.Mvc.Acceptance.Tests/Microsoft.AspNetCore.Mvc.Acceptance.Tests.csproj", "test/Test.Common/Test.Common.shproj", "test/Acceptance.Test.Shared/Acceptance.Test.Shared.shproj", "test/Microsoft.AspNet.WebApi.Versioning.ApiExplorer.Tests/Microsoft.AspNet.WebApi.Versioning.ApiExplorer.Tests.csproj", "test/Microsoft.AspNet.OData.Versioning.ApiExplorer.Tests/Microsoft.AspNet.OData.Versioning.ApiExplorer.Tests.csproj", "test/OData.Test.Shared/OData.Test.Shared.shproj", "test/Microsoft.AspNetCore.OData.Versioning.Tests/Microsoft.AspNetCore.OData.Versioning.Tests.csproj", "test/Microsoft.AspNetCore.OData.Versioning.ApiExplorer.Tests/Microsoft.AspNetCore.OData.Versioning.ApiExplorer.Tests.csproj" # separate paths with comma as in: "test1", "test2"
+          $testProjects = @( Get-ChildItem -Path test/ -Recurse | Where-Object { $_.Extension -match 'shproj' -or $_.Extension -match 'csproj' } | ForEach-Object { $_.FullName } )
 
           dotnet nuget locals all --clear
 
